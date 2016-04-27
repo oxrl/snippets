@@ -5,20 +5,20 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope', '$http', functi
     profesiones();
     
     function empleados(){
-        $http.get('http://localhost/tutoriales/angular/004/api/?a=listar').then(function(r){
+        $http.get('https://snippets-oxrl.rhcloud.com/api/?a=listar').then(function(r){
             $scope.model = r.data;
         });
     }
     
     function profesiones(){
-        $http.get('http://localhost/tutoriales/angular/004/api/?a=profesiones').then(function(r){
+        $http.get('https://snippets-oxrl.rhcloud.com/api/?a=profesiones').then(function(r){
             $scope.profesiones = r.data;
         });
     }
     
     $scope.retirar = function(id){
-        if(confirm('Esta seguro de realizar esta acción?')){
-            $http.get('http://localhost/tutoriales/angular/004/api/?a=eliminar&id=' + id).then(function(r){
+        if(confirm('Esta seguro de realizar esta acciÃ³n?')){
+            $http.get('https://snippets-oxrl.rhcloud.com/api/?a=eliminar&id=' + id).then(function(r){
                 empleados();
             });
         }
@@ -35,7 +35,7 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope', '$http', functi
             FechaNacimiento: $scope.FechaNacimiento
         };
         
-        $http.post('http://localhost/tutoriales/angular/004/api/?a=registrar', model).then(function(r){
+        $http.post('https://snippets-oxrl.rhcloud.com/api/?a=registrar', model).then(function(r){
             empleados();
             
             $scope.Correo = null;
@@ -48,7 +48,7 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope', '$http', functi
 }]);
 
 empleadoControllers.controller('EmpleadoVerCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
-    $http.get('http://localhost/tutoriales/angular/004/api/?a=obtener&id=' + $routeParams.id).then(function(r){
+    $http.get('https://snippets-oxrl.rhcloud.com/api/?a=obtener&id=' + $routeParams.id).then(function(r){
         $scope.model = r.data;
     });
 }]);
