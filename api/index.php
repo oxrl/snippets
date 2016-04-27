@@ -2,8 +2,11 @@
 
 // Cargamos Vendor
 require __DIR__ . '/vendor/autoload.php';
-
-$pdo = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+ $host =  $_ENV['OPENSHIFT_DB_HOST']);
+ $dbname=$_ENV['OPENSHIFT_APP_NAME'];
+ $usuario=$_ENV['OPENSHIFT_MYSQL_DB_USERNAME']);
+ $clave= $_ENV['OPENSHIFT_MYSQL_DB_PASSWORD']);
+$pdo = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $usuario, $clave);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
