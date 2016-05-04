@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app='myapp'>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+		<script src="controller.js"></script>
+		<link rel="stylesheet" type="text/css" href="estilos.css">
+		<title>Consultar Usuario</title>
+	</head>
+
+	<body ng-controller='selectcontroller' ng-cloack>
+
+		<label for="email">Email:</label>
+		<input type="text" ng-model="actual.email" ng-disabled="btnRegistrar == false"><br>
+		<label for="nombre">Nombre:</label>
+		<input type="text" ng-model="actual.nombre"><br>
+		<label for="apellido">Apellido:</label>
+		<input type="text" ng-model="actual.apellido"><br>
+		<label for="genero">Genero:</label>
+		<select name="sexo" ng-model="actual.genero">
+			<option value="M" selected="">M</option>
+			<option value="F">F</option>
+		</select><br/>
+		<label for="pass">Pass:</label>
+		<input type="text" ng-model="actual.pass"><br/>
+		<label for="tipo_usuario">Tipo Usuario:</label>
+		<select
+			ng-model="type"
+			ng-options="value.nombre for value in tipos">
+			<option>--</option>
+		</select><br/><br/>
+		<button type='button' ng-disabled='actual.email == ""' ng-click='eliminar()'>Eliminar</button>
+		<button type='button' ng-disabled='actual.email == ""' ng-click='editar()'>Editar</button>
+		<button type='button' ng-disabled='btnNuevo == false' ng-click='nuevo()'>Nuevo</button>
+		<button type='button' ng-disabled='btnRegistrar == false' ng-click='registrar()'>Registrar</button>
+		<table class="table" ng-init='consultarTodos()'>
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Genero</th>
+					<th>Pass</th>
+					<th>Tipo de Usuario</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='x in users | startFromGrid: currentPage * pageSize | limitTo: pageSize', ng-click='consultarUsuario(x.email)'>
+					<td>{{x.email}}</td>
+					<td>{{x.nombre}}</td>
+					<td>{{x.apellido}}</td>
+					<td>{{x.genero}}</td>
+					<td>{{x.pass}}</td>
+					<td>{{x.tipo_usuario}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button type='button' ng-disabled='currentPage == 0' ng-click='currentPage = currentPage - 1'>&laquo;</button>	
+		<button type='button' ng-disabled='currentPage == page.no - 1' ng-click='setPage(page.no)' ng-repeat='page in pages'>{{page.no}}</button>
+		<button type='button' ng-disabled='currentPage >= users.length/pageSize - 1' ng-click='currentPage = currentPage + 1'>&raquo;</button>
+
+	</body>
+</html>
